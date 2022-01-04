@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import MyContext from '../context/Mycontext';
+import MyContext from '../context/PlanetContext';
 import getStarWars from '../requestAPI';
 
 function Table() {
@@ -17,19 +17,19 @@ function Table() {
     <table>
       <thead>
         <tr>
-          <th>name</th>
-          <th>rotation_period</th>
-          <th>orbital_period</th>
-          <th>diameter</th>
-          <th>climate</th>
-          <th>gravity</th>
-          <th>terrain</th>
-          <th>surface_water</th>
-          <th>population</th>
-          <th>films</th>
-          <th>created</th>
-          <th>edited</th>
-          <th>url</th>
+          <th>Name</th>
+          <th>Rotation Period</th>
+          <th>Orbital Period</th>
+          <th>Diameter</th>
+          <th>Climate</th>
+          <th>Gravity</th>
+          <th>Terrain</th>
+          <th>Surface Water</th>
+          <th>Population</th>
+          <th>Films</th>
+          <th>Created</th>
+          <th>Edited</th>
+          <th>URL</th>
         </tr>
       </thead>
       <tbody>
@@ -44,10 +44,10 @@ function Table() {
             <td>{planet.terrain}</td>
             <td>{planet.surface_water}</td>
             <td>{planet.population}</td>
-            <td>{planet.films}</td>
+            <td><a href={ planet.films }>{planet.films}</a></td>
             <td>{planet.created}</td>
             <td>{planet.edited}</td>
-            <td>{planet.url}</td>
+            <td><a href={ planet.url }>{planet.url}</a></td>
           </tr>
         ))}
       </tbody>
