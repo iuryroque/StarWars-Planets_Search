@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import MyContext from '../context/Mycontext';
-import getStarWars from '../consult_API';
+import getStarWars from '../requestAPI';
 
 function Table() {
   const { planets, setPlanets } = useContext(MyContext);
@@ -12,8 +12,6 @@ function Table() {
     }
     getPlanets();
   }, [setPlanets]);
-
-  // console.log(planets);
 
   return (
     <table>
