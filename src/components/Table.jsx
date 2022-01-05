@@ -3,7 +3,11 @@ import MyContext from '../context/PlanetContext';
 import getStarWars from '../requestAPI';
 
 function Table() {
-  const { planets, setPlanets, search } = useContext(MyContext);
+  const {
+    setPlanets,
+    planets,
+    search,
+  } = useContext(MyContext);
 
   useEffect(() => {
     async function getPlanets() {
@@ -34,6 +38,7 @@ function Table() {
         </tr>
       </thead>
       <tbody>
+
         { planets.filter((planet) => planet.name.toLowerCase().includes(search))
           .map((planet) => (
             <tr key={ planet.name }>

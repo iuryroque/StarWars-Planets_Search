@@ -5,8 +5,23 @@ import MyContext from './PlanetContext';
 function PlanetsProvider({ children }) {
   const [planets, setPlanets] = useState([]);
   const [search, setSearch] = useState('');
+  const [filterType, setFilterType] = useState('population');
+  const [comparisonFilter, setComparisonFilter] = useState('maior que');
+  const [valueFilter, setValueFilter] = useState(0);
   return (
-    <MyContext.Provider value={ { planets, setPlanets, search, setSearch } }>
+    <MyContext.Provider
+      value={ {
+        planets,
+        setPlanets,
+        search,
+        setSearch,
+        filterType,
+        setFilterType,
+        comparisonFilter,
+        setComparisonFilter,
+        valueFilter,
+        setValueFilter } }
+    >
       {children}
     </MyContext.Provider>
   );
