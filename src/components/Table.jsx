@@ -3,7 +3,7 @@ import MyContext from '../context/PlanetContext';
 import getStarWars from '../requestAPI';
 
 function Table() {
-  const { planets, setPlanets } = useContext(MyContext);
+  const { planets, setPlanets, search } = useContext(MyContext);
 
   useEffect(() => {
     async function getPlanets() {
@@ -11,7 +11,8 @@ function Table() {
       setPlanets(data.results);
     }
     getPlanets();
-  }, [setPlanets]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <table>
@@ -33,23 +34,24 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {planets.map((planet) => (
-          <tr key={ planet.name }>
-            <td>{planet.name}</td>
-            <td>{planet.rotation_period}</td>
-            <td>{planet.orbital_period}</td>
-            <td>{planet.diameter}</td>
-            <td>{planet.climate}</td>
-            <td>{planet.gravity}</td>
-            <td>{planet.terrain}</td>
-            <td>{planet.surface_water}</td>
-            <td>{planet.population}</td>
-            <td><a href={ planet.films }>{planet.films}</a></td>
-            <td>{planet.created}</td>
-            <td>{planet.edited}</td>
-            <td><a href={ planet.url }>{planet.url}</a></td>
-          </tr>
-        ))}
+        { planets.filter((planet) => planet.name.toLowerCase().includes(search))
+          .map((planet) => (
+            <tr key={ planet.name }>
+              <td>{planet.name}</td>
+              <td>{planet.rotation_period}</td>
+              <td>{planet.orbital_period}</td>
+              <td>{planet.diameter}</td>
+              <td>{planet.climate}</td>
+              <td>{planet.gravity}</td>
+              <td>{planet.terrain}</td>
+              <td>{planet.surface_water}</td>
+              <td>{planet.population}</td>
+              <td><a href={ planet.films }>{planet.films}</a></td>
+              <td>{planet.created}</td>
+              <td>{planet.edited}</td>
+              <td><a href={ planet.url }>{planet.url}</a></td>
+            </tr>
+          ))}
       </tbody>
     </table>
   );
