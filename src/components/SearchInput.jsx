@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import SearchContext from '../context/PlanetContext';
 
 function SearchInput() {
@@ -12,6 +12,9 @@ function SearchInput() {
     planets,
     setPlanets,
   } = useContext(SearchContext);
+  const [typeList, setTypeList] = useState(
+    ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
+  );
 
   const handleChange = (event) => {
     setSearch(event.target.value);
@@ -26,6 +29,7 @@ function SearchInput() {
       }
       return Number(planet[filterType]) === Number(valueFilter);
     }));
+    setTypeList(typeList.filter((type) => type !== filterType));
   };
 
   return (
@@ -41,11 +45,10 @@ function SearchInput() {
           onChange={ (e) => setFilterType(e.target.value) }
           data-testid="column-filter"
         >
-          <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          { typeList.map((type) => (
+            <option key={ type } value={ type }>{ type }</option>
+          ))}
+
         </select>
         <select
           onChange={ (e) => setComparisonFilter(e.target.value) }
