@@ -15,6 +15,7 @@ function SearchInput() {
   const [typeList, setTypeList] = useState(
     ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
   );
+  const [filterList, setFilterList] = useState([]);
 
   const handleChange = (event) => {
     setSearch(event.target.value);
@@ -30,6 +31,13 @@ function SearchInput() {
       return Number(planet[filterType]) === Number(valueFilter);
     }));
     setTypeList(typeList.filter((type) => type !== filterType));
+
+    const objeto = { filterType, comparisonFilter, valueFilter };
+    setFilterList([...filterList, objeto]);
+  };
+
+  const handleDelete = (filterToDelete) => {
+    setFilterList(filterList.filter((filter) => filter.filterType !== filterToDelete));
   };
 
   return (
@@ -72,6 +80,23 @@ function SearchInput() {
           butão
         </button>
       </form>
+      {console.log(filterList, 'filterList')}
+      { filterList && filterList.map((filter) => (
+        <p key={ filter.filterType }>
+          {
+            `${filter.filterType}
+         ${filter.comparisonFilter}
+         ${filter.valueFilter}`
+          }
+          <button
+            type="button"
+            onClick={ () => handleDelete(filter.filterType) }
+          >
+            X
+
+          </button>
+
+        </p>)) }
     </div>
   );
 }
