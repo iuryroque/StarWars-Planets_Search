@@ -9,6 +9,9 @@ function PlanetsProvider({ children }) {
   const [filterType, setFilterType] = useState('population');
   const [comparisonFilter, setComparisonFilter] = useState('maior que');
   const [valueFilter, setValueFilter] = useState(0);
+  const [typeSort, setTypeSort] = useState('name');
+  const [sort, setSort] = useState('ASC');
+  const [change, setChange] = useState(false);
   return (
     <MyContext.Provider
       value={ {
@@ -24,6 +27,12 @@ function PlanetsProvider({ children }) {
         setValueFilter,
         planetsOriginal,
         setPlanetsOriginal,
+        typeSort,
+        setTypeSort,
+        sort,
+        setSort,
+        change,
+        setChange,
       } }
     >
       {children}

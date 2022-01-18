@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import SearchContext from '../context/PlanetContext';
 
+// renomear negoço e coisa
+
 function SearchInput() {
   const { setSearch,
     setFilterType,
@@ -12,11 +14,30 @@ function SearchInput() {
     planets,
     setPlanets,
     planetsOriginal,
+    typeSort,
+    setTypeSort,
+    sort,
+    setSort,
+    change,
+    setChange,
   } = useContext(SearchContext);
   const [typeList, setTypeList] = useState(
     ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
   );
   const [filterList, setFilterList] = useState([]);
+  const negoço = ['Name',
+    'Rotation Period',
+    'Orbital Period',
+    'Diameter',
+    'Climate',
+    'Gravity',
+    'Terrain',
+    'Surface Water',
+    'Population',
+    'Films',
+    'Created',
+    'Edited',
+    'URL'];
 
   const handleChange = (event) => {
     setSearch(event.target.value);
@@ -33,6 +54,39 @@ function SearchInput() {
     setPlanets(planetsOriginal);
   };
 
+  const handleSort = () => {
+    const MENOSUM = -1;
+    function coisa(a, b) {
+      if (sort === 'ASC') {
+        return a[typeSort] > b[typeSort];
+      }
+      if (sort === 'DESC') {
+        return b[typeSort] > a[typeSort];
+      }
+    }
+    if (typeList.includes(typeSort)) {
+      let newArray = [];
+      if (sort === 'DESC') {
+        newArray = planets.sort((a, b) => b[typeSort] - a[typeSort]);
+      } else {
+        newArray = planets.sort((a, b) => a[typeSort] - b[typeSort]);
+      }
+      setPlanets(newArray);
+    } else {
+      setPlanets(planets.sort((a, b) => {
+        if (coisa(a, b)) {
+          return 1;
+        } if (coisa(b, a)) {
+          return MENOSUM;
+        }
+        return 0;
+      }));
+    }
+    setChange(!change);
+  };
+  useEffect(() => {
+    handleSort();
+  }, [planets]);
   // Feito com a ajuda de Ulisses e Leandro
   useEffect(() => {
     filterList.forEach((filters) => {
@@ -85,6 +139,48 @@ function SearchInput() {
           data-testid="button-filter"
         >
           butão
+        </button>
+        <select
+          data-testid="column-sort"
+          onChange={ (e) => setTypeSort(e.target.value) }
+        >
+          {negoço.map((type, index) => (
+            <option
+              key={ `${type}__${index}` }
+              value={ type.toLowerCase().replace(' ', '_') }
+            >
+              {type}
+            </option>
+          ))}
+        </select>
+        <label htmlFor="ASC">
+          Ascendente
+          <input
+            type="radio"
+            name="sort"
+            id="ASC"
+            value="ASC"
+            data-testid="column-sort-input-asc"
+            onChange={ (e) => setSort(e.target.value) }
+          />
+        </label>
+        <label htmlFor="DESC">
+          Descendente
+          <input
+            type="radio"
+            name="sort"
+            id="DESC"
+            value="DESC"
+            data-testid="column-sort-input-desc"
+            onChange={ (e) => setSort(e.target.value) }
+          />
+        </label>
+        <button
+          type="button"
+          data-testid="column-sort-button"
+          onClick={ handleSort }
+        >
+          Ordenar
         </button>
       </form>
       { filterList && filterList.map((filter) => (
