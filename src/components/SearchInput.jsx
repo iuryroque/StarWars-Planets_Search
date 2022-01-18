@@ -88,7 +88,7 @@ function SearchInput() {
         </button>
       </form>
       { filterList && filterList.map((filter) => (
-        <p key={ filter.filterType }>
+        <p data-testid="filter" key={ filter.filterType }>
           {
             `${filter.filterType}
          ${filter.comparisonFilter}
@@ -99,7 +99,6 @@ function SearchInput() {
             onClick={ () => handleDelete(filter.filterType) }
           >
             X
-
           </button>
 
         </p>)) }
