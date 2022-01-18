@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SearchContext from '../context/PlanetContext';
 
 function SearchInput() {
@@ -11,6 +11,7 @@ function SearchInput() {
     valueFilter,
     planets,
     setPlanets,
+    planetsOriginal,
   } = useContext(SearchContext);
   const [typeList, setTypeList] = useState(
     ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
@@ -22,24 +23,30 @@ function SearchInput() {
   };
 
   const handleClick = () => {
-    setPlanets(planets.filter((planet) => {
-      if (comparisonFilter === 'maior que') {
-        return Number(planet[filterType]) > valueFilter;
-      } if (comparisonFilter === 'menor que') {
-        return Number(planet[filterType]) < valueFilter;
-      }
-      return Number(planet[filterType]) === Number(valueFilter);
-    }));
     setTypeList(typeList.filter((type) => type !== filterType));
-
     const objeto = { filterType, comparisonFilter, valueFilter };
     setFilterList([...filterList, objeto]);
   };
 
   const handleDelete = (filterToDelete) => {
     setFilterList(filterList.filter((filter) => filter.filterType !== filterToDelete));
+    setPlanets(planetsOriginal);
   };
 
+  // Feito com a ajuda de Ulisses e Leandro
+  useEffect(() => {
+    filterList.forEach((filters) => {
+      setPlanets(planets.filter((planet) => {
+        if (filters.comparisonFilter === 'maior que') {
+          return Number(planet[filters.filterType]) > filters.valueFilter;
+        } if (filters.comparisonFilter === 'menor que') {
+          return Number(planet[filters.filterType]) < filters.valueFilter;
+        }
+        return Number(planet[filters.filterType]) === Number(filters.valueFilter);
+      }));
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterList]);
   return (
     <div>
       <input
@@ -80,7 +87,6 @@ function SearchInput() {
           butão
         </button>
       </form>
-      {console.log(filterList, 'filterList')}
       { filterList && filterList.map((filter) => (
         <p key={ filter.filterType }>
           {

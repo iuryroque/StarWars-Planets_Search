@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import MyContext from './PlanetContext';
 
 function PlanetsProvider({ children }) {
+  const [planetsOriginal, setPlanetsOriginal] = useState([]);
   const [planets, setPlanets] = useState([]);
   const [search, setSearch] = useState('');
   const [filterType, setFilterType] = useState('population');
@@ -20,7 +21,10 @@ function PlanetsProvider({ children }) {
         comparisonFilter,
         setComparisonFilter,
         valueFilter,
-        setValueFilter } }
+        setValueFilter,
+        planetsOriginal,
+        setPlanetsOriginal,
+      } }
     >
       {children}
     </MyContext.Provider>

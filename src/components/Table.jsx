@@ -7,12 +7,14 @@ function Table() {
     setPlanets,
     planets,
     search,
+    setPlanetsOriginal,
   } = useContext(MyContext);
 
   useEffect(() => {
     async function getPlanets() {
       const data = await getStarWars();
       setPlanets(data.results);
+      setPlanetsOriginal(data.results);
     }
     getPlanets();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,7 +41,8 @@ function Table() {
       </thead>
       <tbody>
 
-        { planets.filter((planet) => planet.name.toLowerCase().includes(search))
+        { planets && planets.filter((planet) => planet.name
+          .toLowerCase().includes(search))
           .map((planet) => (
             <tr key={ planet.name }>
               <td>{planet.name}</td>
