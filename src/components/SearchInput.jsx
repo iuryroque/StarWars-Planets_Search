@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import SearchContext from '../context/PlanetContext';
-
-// renomear negoço e coisa
+import './SearchInput.css';
 
 function SearchInput() {
   const { setSearch,
@@ -25,7 +24,7 @@ function SearchInput() {
     ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
   );
   const [filterList, setFilterList] = useState([]);
-  const negoço = ['Name',
+  const tHeadList = ['Name',
     'Rotation Period',
     'Orbital Period',
     'Diameter',
@@ -56,7 +55,7 @@ function SearchInput() {
 
   const handleSort = () => {
     const MENOSUM = -1;
-    function coisa(a, b) {
+    function alphabeticSort(a, b) {
       if (sort === 'ASC') {
         return a[typeSort] > b[typeSort];
       }
@@ -74,9 +73,9 @@ function SearchInput() {
       setPlanets(newArray);
     } else {
       setPlanets(planets.sort((a, b) => {
-        if (coisa(a, b)) {
+        if (alphabeticSort(a, b)) {
           return 1;
-        } if (coisa(b, a)) {
+        } if (alphabeticSort(b, a)) {
           return MENOSUM;
         }
         return 0;
@@ -102,14 +101,15 @@ function SearchInput() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterList]);
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Insira a pesquisa"
-        data-testid="name-filter"
-        onChange={ handleChange }
-      />
-      <form>
+    <div className="form-container">
+      <form className="form-left">
+        <input
+          className="input-search"
+          type="text"
+          placeholder="Insira a pesquisa"
+          data-testid="name-filter"
+          onChange={ handleChange }
+        />
         <select
           onChange={ (e) => setFilterType(e.target.value) }
           data-testid="column-filter"
@@ -140,11 +140,14 @@ function SearchInput() {
         >
           butão
         </button>
+      </form>
+      <form className="form-right">
         <select
+          className="select-sort"
           data-testid="column-sort"
           onChange={ (e) => setTypeSort(e.target.value) }
         >
-          {negoço.map((type, index) => (
+          {tHeadList.map((type, index) => (
             <option
               key={ `${type}__${index}` }
               value={ type.toLowerCase().replace(' ', '_') }
@@ -153,29 +156,32 @@ function SearchInput() {
             </option>
           ))}
         </select>
-        <label htmlFor="ASC">
-          Ascendente
-          <input
-            type="radio"
-            name="sort"
-            id="ASC"
-            value="ASC"
-            data-testid="column-sort-input-asc"
-            onChange={ (e) => setSort(e.target.value) }
-          />
-        </label>
-        <label htmlFor="DESC">
-          Descendente
-          <input
-            type="radio"
-            name="sort"
-            id="DESC"
-            value="DESC"
-            data-testid="column-sort-input-desc"
-            onChange={ (e) => setSort(e.target.value) }
-          />
-        </label>
+        <div className="radios">
+          <label className="asc" htmlFor="ASC">
+            Ascendente
+            <input
+              type="radio"
+              name="sort"
+              id="ASC"
+              value="ASC"
+              data-testid="column-sort-input-asc"
+              onChange={ (e) => setSort(e.target.value) }
+            />
+          </label>
+          <label className="desc" htmlFor="DESC">
+            Descendente
+            <input
+              type="radio"
+              name="sort"
+              id="DESC"
+              value="DESC"
+              data-testid="column-sort-input-desc"
+              onChange={ (e) => setSort(e.target.value) }
+            />
+          </label>
+        </div>
         <button
+          className="button-sort"
           type="button"
           data-testid="column-sort-button"
           onClick={ handleSort }
