@@ -1,0 +1,21 @@
+
+:root {
+  --font-color: #f4f4f4;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-evenly;
+  width:100%;
+}
+
+.form-left, .form-right {
+  display: flex;
+  align-items: center;
+}
+
+.input-search, .select-sort, .button-sort {
+  padding: 10px;
+}
+
+
