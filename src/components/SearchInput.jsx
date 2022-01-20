@@ -104,41 +104,44 @@ function SearchInput() {
     <div className="form-container">
       <form className="form-left">
         <input
-          className="input-search"
+          className="input marging-10"
           type="text"
           placeholder="Insira a pesquisa"
           data-testid="name-filter"
           onChange={ handleChange }
         />
-        <select
-          onChange={ (e) => setFilterType(e.target.value) }
-          data-testid="column-filter"
-        >
-          { typeList.map((type) => (
-            <option key={ type } value={ type }>{ type }</option>
-          ))}
-
-        </select>
-        <select
-          onChange={ (e) => setComparisonFilter(e.target.value) }
-          data-testid="comparison-filter"
-        >
-          <option value="maior que">maior que</option>
-          <option value="menor que">menor que</option>
-          <option value="igual a">igual a</option>
-        </select>
+        <div className="select-search marging-10">
+          <select
+            onChange={ (e) => setFilterType(e.target.value) }
+            data-testid="column-filter"
+          >
+            { typeList.map((type) => (
+              <option key={ type } value={ type }>{ type }</option>
+            ))}
+          </select>
+          <select
+            onChange={ (e) => setComparisonFilter(e.target.value) }
+            data-testid="comparison-filter"
+          >
+            <option value="maior que">maior que</option>
+            <option value="menor que">menor que</option>
+            <option value="igual a">igual a</option>
+          </select>
+        </div>
         <input
+          className="input marging-10"
           value={ valueFilter }
           onChange={ (e) => setValueFilter(e.target.value) }
           type="number"
           data-testid="value-filter"
         />
         <button
+          className="button"
           onClick={ handleClick }
           type="button"
           data-testid="button-filter"
         >
-          butão
+          Pesquisar
         </button>
       </form>
       <form className="form-right">
@@ -181,7 +184,7 @@ function SearchInput() {
           </label>
         </div>
         <button
-          className="button-sort"
+          className="button"
           type="button"
           data-testid="column-sort-button"
           onClick={ handleSort }
