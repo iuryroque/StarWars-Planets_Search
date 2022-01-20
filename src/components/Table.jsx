@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import MyContext from '../context/PlanetContext';
 import getStarWars from '../requestAPI';
+import './Table.css';
 
 function Table() {
   const {
@@ -21,22 +22,22 @@ function Table() {
   }, []);
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Rotation Period</th>
-          <th>Orbital Period</th>
-          <th>Diameter</th>
-          <th>Climate</th>
-          <th>Gravity</th>
-          <th>Terrain</th>
-          <th>Surface Water</th>
-          <th>Population</th>
-          <th>Films</th>
-          <th>Created</th>
-          <th>Edited</th>
-          <th>URL</th>
+    <table className="table-container">
+      <thead className="table-head">
+        <tr className="table-line">
+          <th className="table-colum">Name</th>
+          <th className="table-colum">Rotation Period</th>
+          <th className="table-colum">Orbital Period</th>
+          <th className="table-colum">Diameter</th>
+          <th className="table-colum">Climate</th>
+          <th className="table-colum">Gravity</th>
+          <th className="table-colum">Terrain</th>
+          <th className="table-colum">Surface Water</th>
+          <th className="table-colum">Population</th>
+          <th className="table-colum">Films</th>
+          <th className="table-colum">Created</th>
+          <th className="table-colum">Edited</th>
+          <th className="table-colum">URL</th>
         </tr>
       </thead>
       <tbody>
@@ -54,10 +55,10 @@ function Table() {
               <td>{planet.terrain}</td>
               <td>{planet.surface_water}</td>
               <td>{planet.population}</td>
-              <td><a href={ planet.films }>{planet.films}</a></td>
+              <td><a href={ planet.films }>Link</a></td>
               <td>{planet.created}</td>
               <td>{planet.edited}</td>
-              <td><a href={ planet.url }>{planet.url}</a></td>
+              <td><a href={ planet.url }>Link</a></td>
             </tr>
           ))}
       </tbody>
