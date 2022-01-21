@@ -25,19 +25,19 @@ function Table() {
     <table className="table-container">
       <thead className="table-head">
         <tr className="table-line">
-          <th className="table-colum">Name</th>
-          <th className="table-colum">Rotation Period</th>
-          <th className="table-colum">Orbital Period</th>
-          <th className="table-colum">Diameter</th>
-          <th className="table-colum">Climate</th>
-          <th className="table-colum">Gravity</th>
-          <th className="table-colum">Terrain</th>
-          <th className="table-colum">Surface Water</th>
-          <th className="table-colum">Population</th>
-          <th className="table-colum">Films</th>
-          <th className="table-colum">Created</th>
-          <th className="table-colum">Edited</th>
-          <th className="table-colum">URL</th>
+          <th className="table-column">Name</th>
+          <th className="table-column">Rotation Period</th>
+          <th className="table-column">Orbital Period</th>
+          <th className="table-column">Diameter</th>
+          <th className="table-column">Climate</th>
+          <th className="table-column">Gravity</th>
+          <th className="table-column">Terrain</th>
+          <th className="table-column">Surface Water</th>
+          <th className="table-column">Population</th>
+          <th className="table-column">Films</th>
+          <th className="table-column">Created</th>
+          <th className="table-column">Edited</th>
+          <th className="table-column ">URL</th>
         </tr>
       </thead>
       <tbody>
@@ -45,20 +45,20 @@ function Table() {
         { planets && planets.filter((planet) => planet.name
           .toLowerCase().includes(search))
           .map((planet) => (
-            <tr key={ planet.name }>
-              <td data-testid="planet-name">{planet.name}</td>
-              <td>{planet.rotation_period}</td>
-              <td>{planet.orbital_period}</td>
-              <td>{planet.diameter}</td>
-              <td>{planet.climate}</td>
-              <td>{planet.gravity}</td>
-              <td>{planet.terrain}</td>
-              <td>{planet.surface_water}</td>
-              <td>{planet.population}</td>
-              <td><a href={ planet.films }>Link</a></td>
-              <td>{planet.created}</td>
-              <td>{planet.edited}</td>
-              <td><a href={ planet.url }>Link</a></td>
+            <tr className="line" key={ planet.name }>
+              <td className="line-center padding-left" data-testid="planet-name">{planet.name}</td>
+              <td className="line-center" >{planet.rotation_period}</td>
+              <td className="line-center" >{planet.orbital_period}</td>
+              <td className="line-center" >{planet.diameter}</td>
+              <td className="line-center" >{planet.climate}</td>
+              <td className="line-center" >{planet.gravity}</td>
+              <td className="line-center" >{planet.terrain}</td>
+              <td className="line-center" >{planet.surface_water}</td>
+              <td className="line-center" >{planet.population}</td>
+              <td className="line-center" ><a href={ planet.films }>Link</a></td>
+              <td className="line-center" >{planet.created}</td>
+              <td className="line-center" >{planet.edited}</td>
+              <td className="line-center padding-rigth" ><a href={ planet.url }>Link</a></td>
             </tr>
           ))}
       </tbody>
